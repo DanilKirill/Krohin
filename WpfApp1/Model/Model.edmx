@@ -1,0 +1,917 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище k.kiri11Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthdayDate" Type="datetime" />
+          <Property Name="Restaurant" Type="int" />
+          <Property Name="IdRole" Type="int" />
+          <Property Name="SumZakazov" Type="int" />
+          <Property Name="Premia" Type="int" />
+          <Property Name="VxodId" Type="int" />
+        </EntityType>
+        <EntityType Name="GiftSertificate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="SumZakaza" Type="int" />
+          <Property Name="UnusedNominal" Type="int" />
+          <Property Name="Nominal" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="Structure" Type="nvarchar(max)" />
+          <Property Name="Calories" Type="int" />
+          <Property Name="Section" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="RegistrationZakaza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="ZakazBludaId" Type="int" />
+          <Property Name="NumberTable" Type="int" />
+          <Property Name="DateOpen" Type="datetime" />
+          <Property Name="GiftSertificateId" Type="int" />
+          <Property Name="SaleCart" Type="int" />
+          <Property Name="DateClose" Type="datetime" />
+          <Property Name="Total" Type="int" />
+          <Property Name="ZakazZakrit" Type="bit" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Boss" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpeningDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleCarts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Patronymic" Type="nvarchar(max)" />
+          <Property Name="EmployeeId" Type="nchar" MaxLength="10" />
+          <Property Name="NumberCart" Type="nvarchar" MaxLength="10" />
+          <Property Name="Nominal" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Section" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberTable" Type="int" Nullable="false" />
+          <Property Name="IsBusy" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vxod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="CoutWrong" Type="int" />
+        </EntityType>
+        <EntityType Name="ZakaznBluda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstBludo" Type="int" />
+          <Property Name="SecondBludo" Type="int" />
+          <Property Name="ThirtdBludo" Type="int" />
+          <Property Name="FourthBludo" Type="int" />
+          <Property Name="FifthBludo" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <Association Name="FK_Employees_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Vxod">
+          <End Role="Vxod" Type="Self.Vxod" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vxod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="VxodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Sections">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_GiftSertificate">
+          <End Role="GiftSertificate" Type="Self.GiftSertificate" Multiplicity="0..1" />
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiftSertificate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="GiftSertificateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_SaleCarts">
+          <End Role="SaleCarts" Type="Self.SaleCarts" Multiplicity="0..1" />
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleCarts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="SaleCart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_Table">
+          <End Role="Table" Type="Self.Table" Multiplicity="0..1" />
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="NumberTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_ZakaznBluda">
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="0..1" />
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZakaznBluda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="ZakazBludaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FirstBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu1">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="SecondBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu2">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="ThirtdBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu3">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FourthBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu4">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FifthBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище kkiri11ModelContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiftSertificate" EntityType="Self.GiftSertificate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationZakaza" EntityType="Self.RegistrationZakaza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleCarts" EntityType="Self.SaleCarts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vxod" EntityType="Self.Vxod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZakaznBluda" EntityType="Self.ZakaznBluda" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Restaurants" Association="Self.FK_Employees_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Roles" Association="Self.FK_Employees_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Vxod" Association="Self.FK_Employees_Vxod">
+            <End Role="Vxod" EntitySet="Vxod" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Sections" Association="Self.FK_Menu_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_Employees" Association="Self.FK_RegistrationZakaza_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_GiftSertificate" Association="Self.FK_RegistrationZakaza_GiftSertificate">
+            <End Role="GiftSertificate" EntitySet="GiftSertificate" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_SaleCarts" Association="Self.FK_RegistrationZakaza_SaleCarts">
+            <End Role="SaleCarts" EntitySet="SaleCarts" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_Table" Association="Self.FK_RegistrationZakaza_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_ZakaznBluda" Association="Self.FK_RegistrationZakaza_ZakaznBluda">
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu" Association="Self.FK_ZakaznBluda_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu1" Association="Self.FK_ZakaznBluda_Menu1">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu2" Association="Self.FK_ZakaznBluda_Menu2">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu3" Association="Self.FK_ZakaznBluda_Menu3">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu4" Association="Self.FK_ZakaznBluda_Menu4">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="k.kiri11Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthdayDate" Type="DateTime" Precision="3" />
+          <Property Name="Restaurant" Type="Int32" />
+          <Property Name="IdRole" Type="Int32" />
+          <NavigationProperty Name="Restaurants" Relationship="Self.FK_Employees_Restaurants" FromRole="Employees" ToRole="Restaurants" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Employees_Roles" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_Employees" FromRole="Employees" ToRole="RegistrationZakaza" />
+          <Property Name="SumZakazov" Type="Int32" />
+          <Property Name="Premia" Type="Int32" />
+          <Property Name="VxodId" Type="Int32" />
+          <NavigationProperty Name="Vxod" Relationship="k.kiri11Model.FK_Employees_Vxod" FromRole="Employees" ToRole="Vxod" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="Structure" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Calories" Type="Int32" />
+          <Property Name="Section" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sections" Relationship="Self.FK_Menu_Sections" FromRole="Menu" ToRole="Sections" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="ZakaznBluda" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu" FromRole="Menu" ToRole="ZakaznBluda" />
+          <NavigationProperty Name="ZakaznBluda1" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu1" FromRole="Menu" ToRole="ZakaznBluda" />
+          <NavigationProperty Name="ZakaznBluda2" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu2" FromRole="Menu" ToRole="ZakaznBluda" />
+          <NavigationProperty Name="ZakaznBluda3" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu3" FromRole="Menu" ToRole="ZakaznBluda" />
+          <NavigationProperty Name="ZakaznBluda4" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu4" FromRole="Menu" ToRole="ZakaznBluda" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Boss" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Restaurants" FromRole="Restaurants" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Roles" FromRole="Roles" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Sections" FromRole="Sections" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Vxod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoutWrong" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="k.kiri11Model.FK_Employees_Vxod" FromRole="Vxod" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK_Employees_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Sections">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="k_kiri11Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" />
+          <EntitySet Name="Vxod" EntityType="Self.Vxod" />
+          <AssociationSet Name="FK_Employees_Restaurants" Association="Self.FK_Employees_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Roles" Association="Self.FK_Employees_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Sections" Association="Self.FK_Menu_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <EntitySet Name="RegistrationZakaza" EntityType="k.kiri11Model.RegistrationZakaza" />
+          <EntitySet Name="ZakaznBluda" EntityType="k.kiri11Model.ZakaznBluda" />
+          <AssociationSet Name="FK_RegistrationZakaza_Employees" Association="k.kiri11Model.FK_RegistrationZakaza_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu" Association="k.kiri11Model.FK_ZakaznBluda_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu1" Association="k.kiri11Model.FK_ZakaznBluda_Menu1">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu2" Association="k.kiri11Model.FK_ZakaznBluda_Menu2">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu3" Association="k.kiri11Model.FK_ZakaznBluda_Menu3">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBluda_Menu4" Association="k.kiri11Model.FK_ZakaznBluda_Menu4">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_ZakaznBluda" Association="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda">
+            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <EntitySet Name="GiftSertificate" EntityType="k.kiri11Model.GiftSertificate" />
+          <EntitySet Name="SaleCarts" EntityType="k.kiri11Model.SaleCarts" />
+          <AssociationSet Name="FK_RegistrationZakaza_GiftSertificate" Association="k.kiri11Model.FK_RegistrationZakaza_GiftSertificate">
+            <End Role="GiftSertificate" EntitySet="GiftSertificate" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationZakaza_SaleCarts" Association="k.kiri11Model.FK_RegistrationZakaza_SaleCarts">
+            <End Role="SaleCarts" EntitySet="SaleCarts" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Vxod" Association="k.kiri11Model.FK_Employees_Vxod">
+            <End Role="Vxod" EntitySet="Vxod" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <EntitySet Name="Table" EntityType="k.kiri11Model.Table" />
+          <AssociationSet Name="FK_RegistrationZakaza_Table" Association="k.kiri11Model.FK_RegistrationZakaza_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RegistrationZakaza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="ZakazBludaId" Type="Int32" />
+          <Property Name="NumberTable" Type="Int32" />
+          <Property Name="DateOpen" Type="DateTime" Precision="3" />
+          <Property Name="DateClose" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="k.kiri11Model.FK_RegistrationZakaza_Employees" FromRole="RegistrationZakaza" ToRole="Employees" />
+          <NavigationProperty Name="ZakaznBluda" Relationship="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda" FromRole="RegistrationZakaza" ToRole="ZakaznBluda" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="GiftSertificateId" Type="Int32" />
+          <Property Name="SaleCart" Type="Int32" />
+          <NavigationProperty Name="GiftSertificate" Relationship="k.kiri11Model.FK_RegistrationZakaza_GiftSertificate" FromRole="RegistrationZakaza" ToRole="GiftSertificate" />
+          <NavigationProperty Name="SaleCarts" Relationship="k.kiri11Model.FK_RegistrationZakaza_SaleCarts" FromRole="RegistrationZakaza" ToRole="SaleCarts" />
+          <Property Name="ZakazZakrit" Type="Boolean" />
+          <NavigationProperty Name="Table" Relationship="k.kiri11Model.FK_RegistrationZakaza_Table" FromRole="RegistrationZakaza" ToRole="Table" />
+        </EntityType>
+        <EntityType Name="ZakaznBluda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstBludo" Type="Int32" />
+          <Property Name="SecondBludo" Type="Int32" />
+          <Property Name="ThirtdBludo" Type="Int32" />
+          <Property Name="FourthBludo" Type="Int32" />
+          <Property Name="FifthBludo" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu" FromRole="ZakaznBluda" ToRole="Menu" />
+          <NavigationProperty Name="Menu1" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu1" FromRole="ZakaznBluda" ToRole="Menu" />
+          <NavigationProperty Name="Menu2" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu2" FromRole="ZakaznBluda" ToRole="Menu" />
+          <NavigationProperty Name="Menu3" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu3" FromRole="ZakaznBluda" ToRole="Menu" />
+          <NavigationProperty Name="Menu4" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu4" FromRole="ZakaznBluda" ToRole="Menu" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda" FromRole="ZakaznBluda" ToRole="RegistrationZakaza" />
+          <Property Name="Total" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_RegistrationZakaza_Employees">
+          <End Type="k.kiri11Model.Employees" Role="Employees" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FirstBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu1">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="SecondBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu2">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="ThirtdBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu3">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FourthBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBluda_Menu4">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBluda">
+              <PropertyRef Name="FifthBludo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_ZakaznBluda">
+          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZakaznBluda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="ZakazBludaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GiftSertificate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Nominal" Type="Int32" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_GiftSertificate" FromRole="GiftSertificate" ToRole="RegistrationZakaza" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SumZakaza" Type="Int32" />
+          <Property Name="UnusedNominal" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SaleCarts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NumberCart" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Nominal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_SaleCarts" FromRole="SaleCarts" ToRole="RegistrationZakaza" />
+        </EntityType>
+        <Association Name="FK_RegistrationZakaza_GiftSertificate">
+          <End Type="k.kiri11Model.GiftSertificate" Role="GiftSertificate" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiftSertificate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="GiftSertificateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationZakaza_SaleCarts">
+          <End Type="k.kiri11Model.SaleCarts" Role="SaleCarts" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleCarts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="SaleCart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Vxod">
+          <End Type="k.kiri11Model.Vxod" Role="Vxod" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.Employees" Role="Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vxod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="VxodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberTable" Type="Int32" Nullable="false" />
+          <Property Name="IsBusy" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_Table" FromRole="Table" ToRole="RegistrationZakaza" />
+        </EntityType>
+        <Association Name="FK_RegistrationZakaza_Table">
+          <End Type="k.kiri11Model.Table" Role="Table" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationZakaza">
+              <PropertyRef Name="NumberTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище kkiri11ModelContainer" CdmEntityContainer="k_kiri11Entities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="k.kiri11Model.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="VxodId" ColumnName="VxodId" />
+                <ScalarProperty Name="Premia" ColumnName="Premia" />
+                <ScalarProperty Name="SumZakazov" ColumnName="SumZakazov" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="BirthdayDate" ColumnName="BirthdayDate" />
+                <ScalarProperty Name="Restaurant" ColumnName="Restaurant" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="k.kiri11Model.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Structure" ColumnName="Structure" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="k.kiri11Model.Restaurants">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Boss" ColumnName="Boss" />
+                <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="k.kiri11Model.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="k.kiri11Model.Sections">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vxod">
+            <EntityTypeMapping TypeName="k.kiri11Model.Vxod">
+              <MappingFragment StoreEntitySet="Vxod">
+                <ScalarProperty Name="CoutWrong" ColumnName="CoutWrong" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationZakaza">
+            <EntityTypeMapping TypeName="k.kiri11Model.RegistrationZakaza">
+              <MappingFragment StoreEntitySet="RegistrationZakaza">
+                <ScalarProperty Name="ZakazZakrit" ColumnName="ZakazZakrit" />
+                <ScalarProperty Name="SaleCart" ColumnName="SaleCart" />
+                <ScalarProperty Name="GiftSertificateId" ColumnName="GiftSertificateId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="DateClose" ColumnName="DateClose" />
+                <ScalarProperty Name="DateOpen" ColumnName="DateOpen" />
+                <ScalarProperty Name="NumberTable" ColumnName="NumberTable" />
+                <ScalarProperty Name="ZakazBludaId" ColumnName="ZakazBludaId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZakaznBluda">
+            <EntityTypeMapping TypeName="k.kiri11Model.ZakaznBluda">
+              <MappingFragment StoreEntitySet="ZakaznBluda">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="FifthBludo" ColumnName="FifthBludo" />
+                <ScalarProperty Name="FourthBludo" ColumnName="FourthBludo" />
+                <ScalarProperty Name="ThirtdBludo" ColumnName="ThirtdBludo" />
+                <ScalarProperty Name="SecondBludo" ColumnName="SecondBludo" />
+                <ScalarProperty Name="FirstBludo" ColumnName="FirstBludo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiftSertificate">
+            <EntityTypeMapping TypeName="k.kiri11Model.GiftSertificate">
+              <MappingFragment StoreEntitySet="GiftSertificate">
+                <ScalarProperty Name="UnusedNominal" ColumnName="UnusedNominal" />
+                <ScalarProperty Name="SumZakaza" ColumnName="SumZakaza" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Nominal" ColumnName="Nominal" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleCarts">
+            <EntityTypeMapping TypeName="k.kiri11Model.SaleCarts">
+              <MappingFragment StoreEntitySet="SaleCarts">
+                <ScalarProperty Name="Nominal" ColumnName="Nominal" />
+                <ScalarProperty Name="NumberCart" ColumnName="NumberCart" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="k.kiri11Model.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
+                <ScalarProperty Name="NumberTable" ColumnName="NumberTable" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
