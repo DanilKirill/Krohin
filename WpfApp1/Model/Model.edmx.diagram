@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e4a128f4773741a98a0f7c6bbe07b832" Name="Diagram1">
+      <Diagram DiagramId="e4a128f4773741a98a0f7c6bbe07b832" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="k.kiri11Model.Employees" Width="1.5" PointX="6.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="k.kiri11Model.Menu" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="k.kiri11Model.Restaurants" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
@@ -15,14 +15,7 @@
         <AssociationConnector Association="k.kiri11Model.FK_Employees_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="k.kiri11Model.FK_Menu_Sections" ManuallyRouted="false" />
         <EntityTypeShape EntityType="k.kiri11Model.RegistrationZakaza" Width="1.5" PointX="9.5" PointY="3.375" />
-        <EntityTypeShape EntityType="k.kiri11Model.ZakaznBluda" Width="1.5" PointX="7.25" PointY="5.125" />
         <AssociationConnector Association="k.kiri11Model.FK_RegistrationZakaza_Employees" />
-        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBluda_Menu" />
-        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBluda_Menu1" />
-        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBluda_Menu2" />
-        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBluda_Menu3" />
-        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBluda_Menu4" />
-        <AssociationConnector Association="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda" />
         <EntityTypeShape EntityType="k.kiri11Model.GiftSertificate" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="k.kiri11Model.SaleCarts" Width="1.5" PointX="0.75" PointY="8.75" />
         <AssociationConnector Association="k.kiri11Model.FK_RegistrationZakaza_GiftSertificate" />
@@ -30,6 +23,9 @@
         <AssociationConnector Association="k.kiri11Model.FK_Employees_Vxod" />
         <EntityTypeShape EntityType="k.kiri11Model.Table" Width="1.5" PointX="3.375" PointY="9.875" />
         <AssociationConnector Association="k.kiri11Model.FK_RegistrationZakaza_Table" />
+        <EntityTypeShape EntityType="k.kiri11Model.ZakaznBludaNew" Width="1.5" PointX="11.75" PointY="5" />
+        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBludaNew_Menu" />
+        <AssociationConnector Association="k.kiri11Model.FK_ZakaznBludaNew_RegistrationZakaza" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

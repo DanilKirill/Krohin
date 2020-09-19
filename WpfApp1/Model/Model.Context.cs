@@ -32,9 +32,9 @@ namespace WpfApp1.Model
         public virtual DbSet<Sections> Sections { get; set; }
         public virtual DbSet<Vxod> Vxod { get; set; }
         public virtual DbSet<RegistrationZakaza> RegistrationZakaza { get; set; }
-        public virtual DbSet<ZakaznBluda> ZakaznBluda { get; set; }
         public virtual DbSet<GiftSertificate> GiftSertificate { get; set; }
         public virtual DbSet<SaleCarts> SaleCarts { get; set; }
         public virtual DbSet<Table> Table { get; set; }
+        public virtual DbSet<ZakaznBludaNew> ZakaznBludaNew { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace WpfApp1.Model
     
     public partial class RegistrationZakaza
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RegistrationZakaza()
+        {
+            this.ZakaznBludaNew = new HashSet<ZakaznBludaNew>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> EmployeeId { get; set; }
         public Nullable<int> ZakazBludaId { get; set; }
@@ -26,9 +32,10 @@ namespace WpfApp1.Model
         public Nullable<bool> ZakazZakrit { get; set; }
     
         public virtual Employees Employees { get; set; }
-        public virtual ZakaznBluda ZakaznBluda { get; set; }
         public virtual GiftSertificate GiftSertificate { get; set; }
         public virtual SaleCarts SaleCarts { get; set; }
         public virtual Table Table { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ZakaznBludaNew> ZakaznBludaNew { get; set; }
     }
 }

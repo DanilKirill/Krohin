@@ -146,5 +146,11 @@ namespace WpfApp1
             menu.Show();
             Hide();
         }
+
+        private void dgBluda_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DopInformationBludWindow nextWindow = new DopInformationBludWindow((Model.Menu)dgBluda.SelectedItem);
+            nextWindow.ShowDialog();
+        }
     }
 }

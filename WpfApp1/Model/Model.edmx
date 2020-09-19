@@ -114,17 +114,16 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="CoutWrong" Type="int" />
         </EntityType>
-        <EntityType Name="ZakaznBluda">
+        <EntityType Name="ZakaznBludaNew">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstBludo" Type="int" />
-          <Property Name="SecondBludo" Type="int" />
-          <Property Name="ThirtdBludo" Type="int" />
-          <Property Name="FourthBludo" Type="int" />
-          <Property Name="FifthBludo" Type="int" />
-          <Property Name="Total" Type="int" />
+          <Property Name="IdBluda" Type="int" />
+          <Property Name="NameBluda" Type="nvarchar(max)" />
+          <Property Name="IdZakaza" Type="int" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Price" Type="real" />
         </EntityType>
         <Association Name="FK_Employees_Restaurants">
           <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
@@ -222,75 +221,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistrationZakaza_ZakaznBluda">
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="0..1" />
-          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ZakaznBluda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RegistrationZakaza">
-              <PropertyRef Name="ZakazBludaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu">
+        <Association Name="FK_ZakaznBludaNew_Menu">
           <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+          <End Role="ZakaznBludaNew" Type="Self.ZakaznBludaNew" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Menu">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FirstBludo" />
+            <Dependent Role="ZakaznBludaNew">
+              <PropertyRef Name="IdBluda" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ZakaznBluda_Menu1">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
+        <Association Name="FK_ZakaznBludaNew_RegistrationZakaza">
+          <End Role="RegistrationZakaza" Type="Self.RegistrationZakaza" Multiplicity="0..1" />
+          <End Role="ZakaznBludaNew" Type="Self.ZakaznBludaNew" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Menu">
+            <Principal Role="RegistrationZakaza">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="SecondBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu2">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="ThirtdBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu3">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FourthBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu4">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="ZakaznBluda" Type="Self.ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FifthBludo" />
+            <Dependent Role="ZakaznBludaNew">
+              <PropertyRef Name="IdZakaza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -305,7 +256,7 @@
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vxod" EntityType="Self.Vxod" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ZakaznBluda" EntityType="Self.ZakaznBluda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZakaznBludaNew" EntityType="Self.ZakaznBludaNew" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Employees_Restaurants" Association="Self.FK_Employees_Restaurants">
             <End Role="Restaurants" EntitySet="Restaurants" />
             <End Role="Employees" EntitySet="Employees" />
@@ -338,29 +289,13 @@
             <End Role="Table" EntitySet="Table" />
             <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistrationZakaza_ZakaznBluda" Association="Self.FK_RegistrationZakaza_ZakaznBluda">
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+          <AssociationSet Name="FK_ZakaznBludaNew_Menu" Association="Self.FK_ZakaznBludaNew_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBludaNew" EntitySet="ZakaznBludaNew" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBludaNew_RegistrationZakaza" Association="Self.FK_ZakaznBludaNew_RegistrationZakaza">
             <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu" Association="Self.FK_ZakaznBluda_Menu">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu1" Association="Self.FK_ZakaznBluda_Menu1">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu2" Association="Self.FK_ZakaznBluda_Menu2">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu3" Association="Self.FK_ZakaznBluda_Menu3">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu4" Association="Self.FK_ZakaznBluda_Menu4">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
+            <End Role="ZakaznBludaNew" EntitySet="ZakaznBludaNew" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -399,11 +334,7 @@
           <Property Name="Section" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Menu_Sections" FromRole="Menu" ToRole="Sections" />
           <Property Name="Price" Type="Double" />
-          <NavigationProperty Name="ZakaznBluda" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu" FromRole="Menu" ToRole="ZakaznBluda" />
-          <NavigationProperty Name="ZakaznBluda1" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu1" FromRole="Menu" ToRole="ZakaznBluda" />
-          <NavigationProperty Name="ZakaznBluda2" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu2" FromRole="Menu" ToRole="ZakaznBluda" />
-          <NavigationProperty Name="ZakaznBluda3" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu3" FromRole="Menu" ToRole="ZakaznBluda" />
-          <NavigationProperty Name="ZakaznBluda4" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu4" FromRole="Menu" ToRole="ZakaznBluda" />
+          <NavigationProperty Name="ZakaznBludaNew" Relationship="k.kiri11Model.FK_ZakaznBludaNew_Menu" FromRole="Menu" ToRole="ZakaznBludaNew" />
         </EntityType>
         <EntityType Name="Restaurants">
           <Key>
@@ -499,33 +430,8 @@
             <End Role="Menu" EntitySet="Menu" />
           </AssociationSet>
           <EntitySet Name="RegistrationZakaza" EntityType="k.kiri11Model.RegistrationZakaza" />
-          <EntitySet Name="ZakaznBluda" EntityType="k.kiri11Model.ZakaznBluda" />
           <AssociationSet Name="FK_RegistrationZakaza_Employees" Association="k.kiri11Model.FK_RegistrationZakaza_Employees">
             <End Role="Employees" EntitySet="Employees" />
-            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu" Association="k.kiri11Model.FK_ZakaznBluda_Menu">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu1" Association="k.kiri11Model.FK_ZakaznBluda_Menu1">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu2" Association="k.kiri11Model.FK_ZakaznBluda_Menu2">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu3" Association="k.kiri11Model.FK_ZakaznBluda_Menu3">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ZakaznBluda_Menu4" Association="k.kiri11Model.FK_ZakaznBluda_Menu4">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistrationZakaza_ZakaznBluda" Association="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda">
-            <End Role="ZakaznBluda" EntitySet="ZakaznBluda" />
             <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
           </AssociationSet>
           <EntitySet Name="GiftSertificate" EntityType="k.kiri11Model.GiftSertificate" />
@@ -547,6 +453,15 @@
             <End Role="Table" EntitySet="Table" />
             <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
           </AssociationSet>
+          <EntitySet Name="ZakaznBludaNew" EntityType="k.kiri11Model.ZakaznBludaNew" />
+          <AssociationSet Name="FK_ZakaznBludaNew_Menu" Association="k.kiri11Model.FK_ZakaznBludaNew_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ZakaznBludaNew" EntitySet="ZakaznBludaNew" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZakaznBludaNew_RegistrationZakaza" Association="k.kiri11Model.FK_ZakaznBludaNew_RegistrationZakaza">
+            <End Role="RegistrationZakaza" EntitySet="RegistrationZakaza" />
+            <End Role="ZakaznBludaNew" EntitySet="ZakaznBludaNew" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="RegistrationZakaza">
           <Key>
@@ -559,7 +474,6 @@
           <Property Name="DateOpen" Type="DateTime" Precision="3" />
           <Property Name="DateClose" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employees" Relationship="k.kiri11Model.FK_RegistrationZakaza_Employees" FromRole="RegistrationZakaza" ToRole="Employees" />
-          <NavigationProperty Name="ZakaznBluda" Relationship="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda" FromRole="RegistrationZakaza" ToRole="ZakaznBluda" />
           <Property Name="Total" Type="Int32" />
           <Property Name="GiftSertificateId" Type="Int32" />
           <Property Name="SaleCart" Type="Int32" />
@@ -567,24 +481,7 @@
           <NavigationProperty Name="SaleCarts" Relationship="k.kiri11Model.FK_RegistrationZakaza_SaleCarts" FromRole="RegistrationZakaza" ToRole="SaleCarts" />
           <Property Name="ZakazZakrit" Type="Boolean" />
           <NavigationProperty Name="Table" Relationship="k.kiri11Model.FK_RegistrationZakaza_Table" FromRole="RegistrationZakaza" ToRole="Table" />
-        </EntityType>
-        <EntityType Name="ZakaznBluda">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstBludo" Type="Int32" />
-          <Property Name="SecondBludo" Type="Int32" />
-          <Property Name="ThirtdBludo" Type="Int32" />
-          <Property Name="FourthBludo" Type="Int32" />
-          <Property Name="FifthBludo" Type="Int32" />
-          <NavigationProperty Name="Menu" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu" FromRole="ZakaznBluda" ToRole="Menu" />
-          <NavigationProperty Name="Menu1" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu1" FromRole="ZakaznBluda" ToRole="Menu" />
-          <NavigationProperty Name="Menu2" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu2" FromRole="ZakaznBluda" ToRole="Menu" />
-          <NavigationProperty Name="Menu3" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu3" FromRole="ZakaznBluda" ToRole="Menu" />
-          <NavigationProperty Name="Menu4" Relationship="k.kiri11Model.FK_ZakaznBluda_Menu4" FromRole="ZakaznBluda" ToRole="Menu" />
-          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_RegistrationZakaza_ZakaznBluda" FromRole="ZakaznBluda" ToRole="RegistrationZakaza" />
-          <Property Name="Total" Type="Int32" />
+          <NavigationProperty Name="ZakaznBludaNew" Relationship="k.kiri11Model.FK_ZakaznBludaNew_RegistrationZakaza" FromRole="RegistrationZakaza" ToRole="ZakaznBludaNew" />
         </EntityType>
         <Association Name="FK_RegistrationZakaza_Employees">
           <End Type="k.kiri11Model.Employees" Role="Employees" Multiplicity="0..1" />
@@ -595,78 +492,6 @@
             </Principal>
             <Dependent Role="RegistrationZakaza">
               <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu">
-          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FirstBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu1">
-          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="SecondBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu2">
-          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="ThirtdBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu3">
-          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FourthBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ZakaznBluda_Menu4">
-          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ZakaznBluda">
-              <PropertyRef Name="FifthBludo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistrationZakaza_ZakaznBluda">
-          <End Type="k.kiri11Model.ZakaznBluda" Role="ZakaznBluda" Multiplicity="0..1" />
-          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ZakaznBluda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RegistrationZakaza">
-              <PropertyRef Name="ZakazBludaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -750,6 +575,43 @@
             </Principal>
             <Dependent Role="RegistrationZakaza">
               <PropertyRef Name="NumberTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ZakaznBludaNew">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBluda" Type="Int32" />
+          <Property Name="IdZakaza" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="k.kiri11Model.FK_ZakaznBludaNew_Menu" FromRole="ZakaznBludaNew" ToRole="Menu" />
+          <NavigationProperty Name="RegistrationZakaza" Relationship="k.kiri11Model.FK_ZakaznBludaNew_RegistrationZakaza" FromRole="ZakaznBludaNew" ToRole="RegistrationZakaza" />
+          <Property Name="Price" Type="Single" />
+          <Property Name="NameBluda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ZakaznBludaNew_Menu">
+          <End Type="k.kiri11Model.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBludaNew" Role="ZakaznBludaNew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBludaNew">
+              <PropertyRef Name="IdBluda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZakaznBludaNew_RegistrationZakaza">
+          <End Type="k.kiri11Model.RegistrationZakaza" Role="RegistrationZakaza" Multiplicity="0..1" />
+          <End Type="k.kiri11Model.ZakaznBludaNew" Role="ZakaznBludaNew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistrationZakaza">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZakaznBludaNew">
+              <PropertyRef Name="IdZakaza" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -843,19 +705,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ZakaznBluda">
-            <EntityTypeMapping TypeName="k.kiri11Model.ZakaznBluda">
-              <MappingFragment StoreEntitySet="ZakaznBluda">
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="FifthBludo" ColumnName="FifthBludo" />
-                <ScalarProperty Name="FourthBludo" ColumnName="FourthBludo" />
-                <ScalarProperty Name="ThirtdBludo" ColumnName="ThirtdBludo" />
-                <ScalarProperty Name="SecondBludo" ColumnName="SecondBludo" />
-                <ScalarProperty Name="FirstBludo" ColumnName="FirstBludo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GiftSertificate">
             <EntityTypeMapping TypeName="k.kiri11Model.GiftSertificate">
               <MappingFragment StoreEntitySet="GiftSertificate">
@@ -887,6 +736,18 @@
               <MappingFragment StoreEntitySet="Table">
                 <ScalarProperty Name="IsBusy" ColumnName="IsBusy" />
                 <ScalarProperty Name="NumberTable" ColumnName="NumberTable" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZakaznBludaNew">
+            <EntityTypeMapping TypeName="k.kiri11Model.ZakaznBludaNew">
+              <MappingFragment StoreEntitySet="ZakaznBludaNew">
+                <ScalarProperty Name="NameBluda" ColumnName="NameBluda" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdZakaza" ColumnName="IdZakaza" />
+                <ScalarProperty Name="IdBluda" ColumnName="IdBluda" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

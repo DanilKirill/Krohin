@@ -8,12 +8,13 @@ using WpfApp1.Model;
 
 namespace WpfApp1.Data
 {
-    class ZakaziBludId:ObservableCollection<ZakaznBluda>
+    class ZakaziBludId:ObservableCollection<RegistrationZakaza>
+        
     {
         k_kiri11Entities db = new k_kiri11Entities();
         public ZakaziBludId()
         {
-            foreach (var item in db.ZakaznBluda)
+            foreach (var item in db.RegistrationZakaza)
             {
                 this.Add(item);
             }

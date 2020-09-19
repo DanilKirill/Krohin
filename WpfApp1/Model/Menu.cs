@@ -17,11 +17,7 @@ namespace WpfApp1.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Menu()
         {
-            this.ZakaznBluda = new HashSet<ZakaznBluda>();
-            this.ZakaznBluda1 = new HashSet<ZakaznBluda>();
-            this.ZakaznBluda2 = new HashSet<ZakaznBluda>();
-            this.ZakaznBluda3 = new HashSet<ZakaznBluda>();
-            this.ZakaznBluda4 = new HashSet<ZakaznBluda>();
+            this.ZakaznBludaNew = new HashSet<ZakaznBludaNew>();
         }
     
         public int Id { get; set; }
@@ -34,14 +30,6 @@ namespace WpfApp1.Model
     
         public virtual Sections Sections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZakaznBluda> ZakaznBluda { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZakaznBluda> ZakaznBluda1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZakaznBluda> ZakaznBluda2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZakaznBluda> ZakaznBluda3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZakaznBluda> ZakaznBluda4 { get; set; }
+        public virtual ICollection<ZakaznBludaNew> ZakaznBludaNew { get; set; }
     }
 }

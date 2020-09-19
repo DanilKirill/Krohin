@@ -26,6 +26,7 @@ namespace WpfApp1
         k_kiri11Entities db = new k_kiri11Entities();
         Model.Vxod Login =new Model.Vxod();
         string DateNow = "";
+        Model.Menu newBludo=new Model.Menu();
 
         public RegZakWind(Model.Vxod Login,string DateNow)
         {
@@ -77,10 +78,14 @@ namespace WpfApp1
 
         private void btnCreateBludo_Click(object sender, RoutedEventArgs e)
         {
-            CreateRegZakazNewWind createRegZakazNewWind  = new CreateRegZakazNewWind();
-            createRegZakazNewWind.Show();
-            Close();
+            Model.RegistrationZakaza registrationZakaza = new RegistrationZakaza();
+            db.RegistrationZakaza.Add(registrationZakaza);
+            db.SaveChanges();
+            
+            CreateRegZakazNewWind createRegZakazNewWind  = new CreateRegZakazNewWind(newBludo, registrationZakaza);
+            createRegZakazNewWind.ShowDialog();
             dgZakazi.ItemsSource = db.RegistrationZakaza.ToList();
+
             //CreateRegZakWind createRegZakWind = new CreateRegZakWind();
             //createRegZakWind.ShowDialog();
 
@@ -88,6 +93,7 @@ namespace WpfApp1
             //            select item;
             //dgZakazi.ItemsSource = query.ToList();
             dgZakazi.ItemsSource = db.RegistrationZakaza.ToList();
+
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)

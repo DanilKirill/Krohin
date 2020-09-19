@@ -6,32 +6,34 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:Data="clr-namespace:WpfApp1.Data" x:Class="WpfApp1.CreateRegZakazNewWind"
         mc:Ignorable="d"
-        Title="CreateRegZakazNewWind" Height="450" Width="800">
+        Title="CreateRegZakazNewWind" Height="450" Width="800" Closing="Window_Closing">
     <Window.Resources>
         <Data:Employee x:Key="Employee"/>
         <Data:TableList x:Key="Table"/>
+        <Data:SaleCart x:Key="SaleCart"/>
+        <Data:GiftSertificate x:Key="GiftSertificate"/>
     </Window.Resources>
     <Grid>
-        <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Left" Height="223" Margin="10,159,0,0" VerticalAlignment="Top" Width="467">
+        <DataGrid Name="dgAddBludo" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="223" Margin="10,159,0,0" VerticalAlignment="Top" Width="467" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Блюдо" Width="auto" />
-                <DataGridTextColumn Header="Количество"  Width="auto" />
-                <DataGridTextColumn Header="Цена"  Width="auto" />
+                <DataGridTextColumn Header="Блюдо" Width="auto" Binding="{Binding NameBluda,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Количество"  Width="auto" Binding="{Binding Count,UpdateSourceTrigger=PropertyChanged }" />
+                <DataGridTextColumn Header="Цена"  Width="467" Binding="{Binding Price,UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="10,28,0,0" FontSize="19" TextAlignment="Center" TextWrapping="Wrap" Text="Добавление заказа" VerticalAlignment="Top" Height="42" Width="772"/>
-        <Button x:Name="btnAdd" Content="Добавить блюдо" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="105"/>
-        <Button x:Name="btnDel" Content="Удалить блюдо из списка" HorizontalAlignment="Left" Margin="151,114,0,0" VerticalAlignment="Top" Width="149"/>
-        <ComboBox HorizontalAlignment="Left" Margin="567,320,0,0" VerticalAlignment="Top" Width="148"/>
-        <ComboBox HorizontalAlignment="Left" Margin="567,195,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.321,0.045"/>
+        <Button x:Name="btnAdd" Content="Добавить блюдо" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="105" Click="btnAdd_Click"/>
+        <Button x:Name="btnDel" Content="Удалить блюдо из списка" HorizontalAlignment="Left" Margin="151,114,0,0" VerticalAlignment="Top" Width="149" Click="btnDel_Click"/>
+        <ComboBox Name="cbSaleCart" ItemsSource="{Binding Source={StaticResource SaleCart}}" DisplayMemberPath="NumberCart" SelectedValuePath="Id" HorizontalAlignment="Left" Margin="567,320,0,0" VerticalAlignment="Top" Width="148"/>
+        <ComboBox Name="cbGiftSertificate" HorizontalAlignment="Left" Margin="567,195,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.321,0.045" ItemsSource="{Binding Source={StaticResource GiftSertificate}}" DisplayMemberPath="Number" SelectedValuePath="Id"  />
         <Label Content="Итого:" HorizontalAlignment="Left" Margin="668,378,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblItog" Content="0" HorizontalAlignment="Left" Margin="708,378,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnSaveZakaz" Content="Сохранить" HorizontalAlignment="Left" Margin="356,388,0,0" VerticalAlignment="Top" Width="76" Click="btnSaveZakaz_Click"/>
         <Label Content="Подарочный сертификат" HorizontalAlignment="Left" Margin="567,169,0,0" VerticalAlignment="Top"/>
         <Label Content="Скидочная карта" HorizontalAlignment="Left" Margin="567,294,0,0" VerticalAlignment="Top" Width="148"/>
         <Button x:Name="btnBuyGiftSertificate" Content="Купить сертификат" HorizontalAlignment="Left" Margin="584,235,0,0" VerticalAlignment="Top" Width="Auto" Click="btnBuyGiftSertificate_Click"/>
-        <CheckBox x:Name="cbCheckGiftSert" Content="" HorizontalAlignment="Left" Margin="545,197,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="cbCheckSaleCart" Content="" HorizontalAlignment="Left" Margin="544,322,0,0" VerticalAlignment="Top"/>
+        <CheckBox Click="cbCheckGiftSert_Click" x:Name="cbChekGiftSertificate" Content="" HorizontalAlignment="Left" Margin="545,197,0,0" VerticalAlignment="Top"/>
+        <CheckBox Click="cbCheckSaleCart_Click" x:Name="cbCheckSaleCart" Content="" HorizontalAlignment="Left" Margin="544,322,0,0" VerticalAlignment="Top"/>
 
         <ComboBox HorizontalAlignment="Left" Margin="480,114,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Source={StaticResource Employee}}" DisplayMemberPath="Surname" SelectedValuePath="Id" x:Name="cbEmployee" />
         <ComboBox SelectionChanged="cbNumberTable_SelectionChanged" ItemsSource="{Binding Source={StaticResource Table}}" DisplayMemberPath="NumberTable" SelectedValuePath="Id" x:Name="cbTable" HorizontalAlignment="Left" Margin="645,114,0,0" VerticalAlignment="Top" Width="120"/>

@@ -4,17 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:core="clr-namespace:WpfApp1.Data"
         mc:Ignorable="d"
         Title="AddBludoZakaz" Height="219" Width="360.5">
+    <Window.Resources>
+        <core:Bludo x:Key="Bludo"/>
+    </Window.Resources>
     <Grid Margin="0,0,-3,-3">
-        <ComboBox Name="cbBluda" HorizontalAlignment="Left" Margin="32,110,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBlock FontSize="18" TextAlignment="Center" Margin="10,19,10,0" TextWrapping="Wrap" Text="Добавление блюда в заказ" VerticalAlignment="Top" Height="39"/>
-        <Button Name="btnPlus" Content="+" HorizontalAlignment="Left" Margin="218,109,0,0" VerticalAlignment="Top" Width="20" Background="#FF3DEA4D" BorderBrush="{x:Null}" Foreground="Black"/>
-        <Button Name="btnMinus" Content="-" HorizontalAlignment="Left" Margin="298,109,0,0" VerticalAlignment="Top" Width="20" Background="#FFEA553D" BorderBrush="{x:Null}" Foreground="Black"/>
+        <ComboBox Name="cbBluda" HorizontalAlignment="Left" Margin="32,110,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Source={StaticResource Bludo}}" DisplayMemberPath="Name" SelectedValuePath="Id" />
+        <TextBlock FontSize="18" TextAlignment="Center" Margin="10,19,10,0" TextWrapping="Wrap" Text="Добавление блюда в заказ" VerticalAlignment="Top" Height="39"  />
+        <Button Name="btnPlus" Content="+" HorizontalAlignment="Left" Margin="298,109,0,0" VerticalAlignment="Top" Width="20" Background="#FF3DEA4D" BorderBrush="{x:Null}" Foreground="Black" RenderTransformOrigin="0.117,0.621" Click="btnPlus_Click"/>
+        <Button Name="btnMinus" Content="-" HorizontalAlignment="Left" Margin="213,109,0,0" VerticalAlignment="Top" Width="20" Background="#FFEA553D" BorderBrush="{x:Null}" Foreground="Black" RenderTransformOrigin="-4.7,0.167" Click="btnMinus_Click"/>
         <TextBlock Name="lblCount" TextAlignment="Center" HorizontalAlignment="Left" Margin="238,112,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
         <Label Content="Блюдо" HorizontalAlignment="Left" Margin="32,79,0,0" VerticalAlignment="Top"/>
         <Label Content="Количество" HorizontalAlignment="Left" Margin="218,81,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="140,160,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="140,160,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
 
     </Grid>
 </Window>
