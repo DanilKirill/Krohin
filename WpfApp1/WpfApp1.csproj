@@ -93,6 +93,9 @@
     <Compile Include="DopInformationBludWindow.xaml.cs">
       <DependentUpon>DopInformationBludWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DopInformationEmployeeWindow.xaml.cs">
+      <DependentUpon>DopInformationEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GiftSertificateWind.xaml.cs">
       <DependentUpon>GiftSertificateWind.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DopInformationBludWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DopInformationEmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

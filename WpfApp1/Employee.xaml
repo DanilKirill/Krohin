@@ -14,15 +14,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" Name="dgEmployee" Height="267" Margin="10,143,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <DataGrid MouseDoubleClick="dgEmployee_MouseDoubleClick"   IsReadOnly="True" AutoGenerateColumns="False" Name="dgEmployee" Height="267" Margin="10,143,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Surname" Binding="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="BirthdayDate" Binding="{Binding BirthdayDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Restaurant" Binding="{Binding Restaurant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridComboBoxColumn Header="Role" ItemsSource="{Binding Source={StaticResource Role}}" DisplayMemberPath="Role" SelectedValueBinding="{Binding Path=IdRole, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="id"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Номер телефона" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridComboBoxColumn Header="Роль" ItemsSource="{Binding Source={StaticResource Role}}" DisplayMemberPath="Role" SelectedValueBinding="{Binding Path=IdRole, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="id"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="btnEmployee" Content="Сотрудники" Margin="24,10,0,0" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Left" Width="91"/>

@@ -138,5 +138,11 @@ namespace WpfApp1
             menu.Show();
             Hide();
         }
+
+        private void dgEmployee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DopInformationEmployeeWindow nextWindow = new DopInformationEmployeeWindow((Employees)dgEmployee.SelectedItem);
+            nextWindow.ShowDialog();
+        }
     }
 }
