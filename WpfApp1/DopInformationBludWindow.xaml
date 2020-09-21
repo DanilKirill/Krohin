@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:core="clr-namespace:WpfApp1.Data"
         mc:Ignorable="d"
         Title="DopInformationBludWindow" Height="450" Width="800">
+    <Window.Resources>
+        <core:RazdelMenu x:Key="RazdelMenu"/>
+    </Window.Resources>
     <Grid>
         <GroupBox  Header="Фотография блюда" HorizontalAlignment="Left" Height="246" Margin="285,82,0,0" VerticalAlignment="Top" Width="218">
             <Image HorizontalAlignment="Left" Height="186" Margin="10,25,0,0" VerticalAlignment="Top" Width="186"/>
@@ -19,7 +23,7 @@
         </GroupBox>
         <GroupBox Header="GroupBox" HorizontalAlignment="Left" Height="328" Margin="566,82,0,0" VerticalAlignment="Top" Width="216">
             <Grid>
-                <ComboBox Name="cbSection" HorizontalAlignment="Left" Margin="44,76,0,0" VerticalAlignment="Top" Width="120"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource RazdelMenu}}" DisplayMemberPath="Section" SelectedValuePath="Id" Name="cbSection" HorizontalAlignment="Left" Margin="44,76,0,0" VerticalAlignment="Top" Width="120"/>
                 <TextBox Name="txtCalories" HorizontalAlignment="Left" Height="23" Margin="44,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                 <TextBox Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="44,272,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             </Grid>

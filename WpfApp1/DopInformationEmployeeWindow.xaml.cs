@@ -31,7 +31,8 @@ namespace WpfApp1
             txtRestaurant.Text = itemEmployee.Restaurants.Name;
             txtBirthday.Text = itemEmployee.BirthdayDate.ToString();
             cbRole.ItemsSource = db.Roles.ToList();
-            cbRole.SelectedIndex = itemEmployee.Roles.id;
+            if (itemEmployee.Roles.id!=0)
+            cbRole.SelectedIndex = itemEmployee.Roles.id-1;
         }
     }
 }

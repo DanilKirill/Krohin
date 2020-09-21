@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:core="clr-namespace:WpfApp1.Data"
         mc:Ignorable="d"
         Title="Дополнительная информация о сотрудниках" Height="450" Width="800">
+    <Window.Resources>
+        <core:Role x:Key="Role"/>
+    </Window.Resources>
     <Grid Background="Violet">
         <GroupBox Header="Фотография сотрудника" HorizontalAlignment="Left" Height="194" Margin="293,75,0,0" VerticalAlignment="Top" Width="189">
             <Image HorizontalAlignment="Left" Height="151" Margin="10,10,0,0" VerticalAlignment="Top" Width="162"/>
@@ -25,7 +29,7 @@
                 <TextBox Name="txtRestaurant" HorizontalAlignment="Left" Height="23" Margin="40,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             </Grid>
         </GroupBox>
-        <ComboBox Name="cbRole" HorizontalAlignment="Left" Margin="323,321,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource Role}}" DisplayMemberPath="Role" SelectedValuePath="Id" Name="cbRole" HorizontalAlignment="Left" Margin="323,321,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

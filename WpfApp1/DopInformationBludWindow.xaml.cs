@@ -27,6 +27,8 @@ namespace WpfApp1
             txtPrice.Text = itemBludo.Price.ToString() ;
             txtStructure.Text = itemBludo.Structure;
             txtWeigth.Text = itemBludo.Weight.ToString();
+            if (itemBludo.Sections.Id != 0)
+                cbSection.SelectedIndex = itemBludo.Sections.Id - 1;
         }
     }
 }
